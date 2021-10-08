@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:latest
+    restart: always
+    # volumes:
+    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    #   - ./postgres:/var/lib/postgresql/data/ # persist data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=goweb
+    ports:
+      - "5432:5432"
