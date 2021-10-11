@@ -8,7 +8,7 @@ build: elm
 	@go build -ldflags="-X 'goweb/version.Version=$(VERSION)'"
 # Run the server
 .PHONY: run
-run: elm
+run:
 	@go run main.go
 
 # Run tests
@@ -20,13 +20,3 @@ test:
 .PHONY: db
 db:
 	@docker compose up db
-
-# Build the elm app
-.PHONY: elm
-elm:
-	@elm make frontend/Index.elm --output static/index.js
-
-# Develop elm app
-.PHONY: elm-dev
-elm-dev:
-	@elm-live frontend/Index.elm --open -- --debug

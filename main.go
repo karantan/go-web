@@ -19,9 +19,7 @@ func Migrate() {
 	user.AutoMigrate(db.DB)
 }
 
-//go:embed static/index.html
-//go:embed static/index.js
-//go:embed static/style.css
+//go:embed assets/*
 var staticFS embed.FS
 
 func setupRouter() *gin.Engine {
@@ -30,13 +28,13 @@ func setupRouter() *gin.Engine {
 
 	// Add static assets to binary.
 	// See https://github.com/gin-gonic/examples/tree/master/assets-in-binary
-	// templ := template.Must(template.New("").ParseFS(staticFS, "static/index.html"))
+	// templ := template.Must(template.New("").ParseFS(staticFS, "templates/index.html"))
 	// router.SetHTMLTemplate(templ)
 	// router.StaticFS("/public", http.FS(staticFS))
 
 	// Uncoment this for faster html and css development
-	router.LoadHTMLGlob("static/index.html")
-	router.Static("/public/static", "./static")
+	router.LoadHTMLGlob("templates/**.html")
+	router.Static("/assets", "./assets")
 
 	router.GET("/", index)
 	router.GET("/ping", ping)

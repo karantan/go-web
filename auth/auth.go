@@ -79,5 +79,7 @@ func Me(c *gin.Context) {
 }
 
 func Status(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"status": "You are logged in"})
+	c.HTML(http.StatusOK, "status.html", gin.H{
+		"title": "Dunder Mifflin",
+	})
 }

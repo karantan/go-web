@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.7.4
 	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/lib/pq v1.10.3 // indirect
+	github.com/spf13/cobra v1.2.1
 	go.uber.org/zap v1.19.1
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 	gorm.io/driver/postgres v1.1.2
