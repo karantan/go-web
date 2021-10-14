@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {{template "global/meta" .}}
+    <link href="/assets/css/documentation.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="header-wrapper">
+    <nav class="navbar navbar-transparent navbar-fixed-top" role="navigation" color-on-scroll>
+        <div class="container">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul  class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href='https://github.com/karantan/go-web/issues/new' target="_blank" id="issueButton" class="btn btn-simple btn-neutral">Have an issue?</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="header" style="background-image: url('/assets//img/full-screen-image-3.jpg');">
+        <div class="filter"></div>
+        <div class="title-container text-center">
+            <div class="row">
+                <div class="col-md-5">
+                </div>
+                <div class="col-md-2">
+                    <h1>Go Web</h1>
+                    <form action="/login" method="post">
+                        {{range .MsgWarn}}
+                        <div class="alert alert-danger" role="alert">
+                            {{.}}
+                        </div>
+                        {{end}}
+                        <div class="form-group">
+                            <label >Username</label>
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label >Password</label>
+                            <input type="password" class="form-control" placeholder="Password" name="password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-fill btn-round">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+{{template "global/scripts" .}}
+</html>

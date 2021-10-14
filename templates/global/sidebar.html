@@ -1,28 +1,34 @@
-{{define "sidebar"}}
-<div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
-
+{{define "global/sidebar"}}
+<div class="sidebar" data-color="blue" data-image="/assets/img/sidebar-5.jpg">
     <!--
-
         Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
         Tip 2: you can also add an image using data-image tag
-
     -->
-
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="https://github.com/karantan/go-web" class="simple-text">
                 Go Web
             </a>
         </div>
-
         <ul class="nav">
             <li class="active">
-                <a href="dashboard.html">
+                <a href="/backend/">
                     <i class="pe-7s-graph"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-
+            <li>
+                <a href="/backend/users">
+                    <i class="pe-7s-note2"></i>
+                    <p>Users</p>
+                </a>
+            </li>
+            <li>
+                <a href="/backend/user/add">
+                    <i class="pe-7s-user"></i>
+                    <p>Add User</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

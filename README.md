@@ -11,11 +11,12 @@ terminal type:
 $ pgcli postgres://postgres:secret@localhost:5432/goweb
 ```
 
-## TODO
-- [ ] add CLI for adding & removing users
-
 ## Useful resources
 
 - [Style guideline for Go packages](https://rakyll.org/style-packages/)
 - https://github.com/gothinkster/golang-gin-realworld-example-app/
 - https://gorm.io/docs/index.html
+- https://github.dev/demo-apps/go-gin-app
+
+
+https://hoohoo.top/blog/20210530112304-golang-tutorial-introduction-gin-html-template-and-how-integration-with-bootstrap/

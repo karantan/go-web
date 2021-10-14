@@ -6,14 +6,14 @@ import (
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 // User database model - `users` table in postgres
 type User struct {
-	ID           uint   `gorm:"primary_key"`
-	Username     string `gorm:"column:username"`
+	gorm.Model          // include fields ID, CreatedAt, UpdatedAt, DeletedAt
+	Username     string `gorm:"column:username;unique"`
 	PasswordHash string `gorm:"column:password;not null"`
-	CreatedAt    time.Time
 }
 
 // Migrate the schema of database if needed
@@ -49,10 +49,25 @@ func FindOneUser(db db.Database, user *User) (User, error) {
 	return u, result.Error
 }
 
-// // You could update properties of an UserModel to database returning with error info.
-// //  err := db.Model(userModel).Update(UserModel{Username: "wangzitian0"}).Error
-// func (u *User) Update(db db.Database, user *User) error {
-// 	db := common.GetDB()
-// 	err := db.Model(u).Update(user).Error
-// 	return err
-// }
+// FindByID retrievs a user by ID
+func FindByID(db db.Database, ID int) (User, error) {
+	var u User
+	result := db.Find(&u, ID)
+	return u, result.Error
+}
+
+func GetAll(db db.Database) ([]User, error) {
+	var users []User
+	result := db.Find(&users)
+	return users, result.Error
+}
+
+func Update(db db.Database, user *User) error {
+	return db.Save(&user).Error
+}
+
+// DeleteByID soft deletes the user `user`.
+func DeleteByID(db db.Database, ID int) error {
+	var u User
+	return db.Delete(&u, ID).Error
+}

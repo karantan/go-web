@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Go Web Dashboard</title>
+    {{template "global/meta" .}}
+</head>
+<body>
+    <div class="wrapper">
+        {{template "global/sidebar" .}}
+    
+        <div class="main-panel">
+            {{template "global/navbar" .}}
+    
+    
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        {{range .MsgInfo}}
+                        <div class="alert alert-success" role="alert">
+                            {{.}}
+                        </div>
+                        {{end}}
+                        {{range .MsgWarn}}
+                        <div class="alert alert-warning" role="alert">
+                            {{.}}
+                        </div>
+                        {{end}}
+
+                        <h2>Latest Snippets</h2>
+                        <p>There's nothing to see here yet!</p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Invoke the footer template -->
+            {{template "global/footer" .}}    
+        </div>
+    </div>
+</body>
+{{template "global/scripts" .}}
+</html>

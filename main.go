@@ -24,7 +24,7 @@ var staticFS embed.FS
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
-	router.Use(sessions.Sessions("mysession", sessions.NewCookieStore([]byte("secret"))))
+	router.Use(sessions.Sessions("goweb", sessions.NewCookieStore([]byte("secret"))))
 
 	// Add static assets to binary.
 	// See https://github.com/gin-gonic/examples/tree/master/assets-in-binary
@@ -33,32 +33,35 @@ func setupRouter() *gin.Engine {
 	// router.StaticFS("/public", http.FS(staticFS))
 
 	// Uncoment this for faster html and css development
-	router.LoadHTMLGlob("templates/**.html")
+	router.LoadHTMLGlob("templates/**/*.html")
 	router.Static("/assets", "./assets")
 
-	router.GET("/", index)
-	router.GET("/ping", ping)
+	router.GET("/", auth.LoginForm)
 	router.POST("/login", auth.Login)
 	router.GET("/logout", auth.Logout)
 
-	private := router.Group("/private")
-	private.Use(auth.AuthRequired)
+	backend := router.Group("/backend")
+	backend.Use(auth.AuthRequired)
 	{
-		private.GET("/me", auth.Me)
-		private.GET("/status", auth.Status)
+		backend.GET("/", dashboard)
+		backend.GET("/users", user.List)
+		backend.GET("/user/add", user.ShowAdd)
+		backend.POST("/user/add", user.Add)
+		backend.GET("/user/:id/edit", user.ShowEdit)
+		backend.POST("/user/:id/edit", user.Edit)
+		backend.GET("/user/:id/delete", user.Remove)
 	}
 
 	return router
 }
 
-func index(c *gin.Context) {
+func dashboard(c *gin.Context) {
+	session := sessions.Default(c)
+	user := session.Get(auth.UserKey)
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title": "Dunder Mifflin",
+		"user": user,
 	})
-}
-
-func ping(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"foo": "bar"})
+	return
 }
 
 func main() {
